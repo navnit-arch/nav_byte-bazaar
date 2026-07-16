@@ -86,5 +86,5 @@ Ask a question like:
 4. Create embeddings.
 5. Store in the vector database.
 6. Retrieve top matches for a question.
-7. Build an augmented prompt from question + context.
+7. Build an augmented prompt from question + context.  
 8. Generate and return the answer with source names.
