@@ -1,4 +1,3 @@
-import os
 import shutil
 from pathlib import Path
 from typing import Iterable
@@ -13,9 +12,22 @@ from langchain_community.document_loaders import (
     TextLoader,
 )
 from langchain_core.documents import Document
+from langchain_core.embeddings import Embeddings
 
-from config import DEFAULT_EMBEDDING_MODEL, DOCS_DIR, VECTOR_STORE_DIR
+from config import (
+    CHUNK_OVERLAP,
+    CHUNK_SIZE,
+    DOCS_DIR,
+    EMBEDDING_MODEL,
+    EMBEDDING_PROVIDER,
+    KNOWLEDGE_DIR,
+    LOCAL_EMBEDDING_DIMENSIONS,
+    VECTOR_COLLECTION_NAME,
+    VECTOR_DB_PROVIDER,
+    VECTOR_STORE_DIR,
+)
 from local_embeddings import LocalHashEmbeddings
+from okf import load_okf_document
 
 
 SUPPORTED_EXTENSIONS = {".pdf", ".docx", ".csv", ".json", ".txt", ".md"}
@@ -32,6 +44,8 @@ def _load_text_file(file_path: Path) -> list[Document]:
 def load_file(file_path: Path) -> list[Document]:
     suffix = file_path.suffix.lower()
 
+    if file_path.suffix.lower() == ".md" and KNOWLEDGE_DIR in file_path.parents:
+        return [load_okf_document(file_path)]
     if suffix == ".pdf":
         loaded_documents = PyPDFLoader(str(file_path)).load()
     elif suffix == ".docx":
@@ -73,6 +87,27 @@ def load_documents(source_dir: Path) -> tuple[list[Document], list[str]]:
     return documents, warnings
 
 
+def discover_data_sources() -> list[Path]:
+    sources: list[Path] = []
+    if KNOWLEDGE_DIR.exists():
+        sources.append(KNOWLEDGE_DIR)
+    if DOCS_DIR.exists() and DOCS_DIR != KNOWLEDGE_DIR:
+        sources.append(DOCS_DIR)
+    return sources
+
+
+def ingest_documents(data_sources: Iterable[Path]) -> tuple[list[Document], list[str]]:
+    all_documents: list[Document] = []
+    all_warnings: list[str] = []
+
+    for source_dir in data_sources:
+        documents, warnings = load_documents(source_dir)
+        all_documents.extend(documents)
+        all_warnings.extend(warnings)
+
+    return all_documents, all_warnings
+
+
 def split_text(text: str, chunk_size: int = 600, chunk_overlap: int = 100) -> list[str]:
     if chunk_size <= 0:
         raise ValueError("chunk_size must be greater than zero")
@@ -94,11 +129,15 @@ def split_text(text: str, chunk_size: int = 600, chunk_overlap: int = 100) -> li
     return [chunk for chunk in chunks if chunk]
 
 
-def chunk_documents(documents: Iterable[Document]) -> list[Document]:
+def chunk_documents(
+    documents: Iterable[Document],
+    chunk_size: int = CHUNK_SIZE,
+    chunk_overlap: int = CHUNK_OVERLAP,
+) -> list[Document]:
     chunked_documents: list[Document] = []
 
     for document in documents:
-        chunks = split_text(document.page_content)
+        chunks = split_text(document.page_content, chunk_size=chunk_size, chunk_overlap=chunk_overlap)
         for index, chunk in enumerate(chunks):
             chunked_documents.append(
                 Document(
@@ -110,34 +149,73 @@ def chunk_documents(documents: Iterable[Document]) -> list[Document]:
     return chunked_documents
 
 
-def build_vectorstore() -> Chroma:
-    load_dotenv()
+def create_embedding_function() -> Embeddings:
+    if EMBEDDING_PROVIDER == "local_hash":
+        return LocalHashEmbeddings(dimensions=LOCAL_EMBEDDING_DIMENSIONS)
 
-    documents, warnings = load_documents(DOCS_DIR)
-    for warning in warnings:
-        print(f"Warning: {warning}")
+    raise ValueError(
+        f"Unsupported EMBEDDING_PROVIDER={EMBEDDING_PROVIDER!r}. "
+        "Set EMBEDDING_PROVIDER=local_hash."
+    )
 
-    if not documents:
-        raise RuntimeError(f"No supported files found in {DOCS_DIR}")
 
-    chunked_documents = chunk_documents(documents)
-    embeddings = LocalHashEmbeddings(dimensions=int(os.getenv("LOCAL_EMBEDDING_DIMENSIONS", "64")))
+def embed_chunks(documents: list[Document], embedding_function: Embeddings) -> list[list[float]]:
+    return embedding_function.embed_documents([document.page_content for document in documents])
+
+
+def create_vectorstore(embedding_function: Embeddings) -> Chroma:
+    if VECTOR_DB_PROVIDER != "chroma":
+        raise ValueError(
+            f"Unsupported VECTOR_DB_PROVIDER={VECTOR_DB_PROVIDER!r}. "
+            "Set VECTOR_DB_PROVIDER=chroma."
+        )
+
+    return Chroma(
+        collection_name=VECTOR_COLLECTION_NAME,
+        persist_directory=str(VECTOR_STORE_DIR),
+        embedding_function=embedding_function,
+    )
+
+
+def store_embeddings(documents: list[Document], vectors: list[list[float]], embedding_function: Embeddings) -> Chroma:
+    if len(documents) != len(vectors):
+        raise ValueError("Mismatch between number of chunk documents and embeddings")
 
     if VECTOR_STORE_DIR.exists():
         shutil.rmtree(VECTOR_STORE_DIR)
 
-    vectorstore = Chroma(
-        collection_name="learning_rag",
-        persist_directory=str(VECTOR_STORE_DIR),
-        embedding_function=embeddings,
-    )
-    vectorstore.add_documents(chunked_documents)
+    vectorstore = create_vectorstore(embedding_function)
+    vectorstore.add_documents(documents)
     return vectorstore
+
+
+def build_vectorstore() -> Chroma:
+    load_dotenv()
+
+    data_sources = discover_data_sources()
+    if not data_sources:
+        raise RuntimeError("No data sources found. Expected data/knowledge or data/sample_docs")
+
+    documents, warnings = ingest_documents(data_sources)
+    for warning in warnings:
+        print(f"Warning: {warning}")
+
+    if not documents:
+        raise RuntimeError("No supported files found in configured data sources")
+
+    chunked_documents = chunk_documents(documents)
+    embedding_function = create_embedding_function()
+    vectors = embed_chunks(chunked_documents, embedding_function)
+    return store_embeddings(chunked_documents, vectors, embedding_function)
 
 
 def main() -> None:
     build_vectorstore()
-    print(f"Indexed documents into {VECTOR_STORE_DIR}")
+    print(
+        f"Indexed documents into {VECTOR_STORE_DIR} using "
+        f"embedding_provider={EMBEDDING_PROVIDER}, embedding_model={EMBEDDING_MODEL}, "
+        f"vector_db_provider={VECTOR_DB_PROVIDER}"
+    )
 
 
 if __name__ == "__main__":

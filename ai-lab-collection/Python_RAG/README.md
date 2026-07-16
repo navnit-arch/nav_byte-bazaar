@@ -1,16 +1,15 @@
 # Python RAG with LangGraph
 
-This project is a small learning example that shows how to build a basic Retrieval-Augmented Generation app with LangGraph.
+This project is a small learning example that shows how to build a basic Retrieval-Augmented Generation app with LangGraph, using OKF (Open Knowledge Format) files as the primary knowledge source.
 
 ## What it does
 
-- Loads files from `data/sample_docs` by extension (`.pdf`, `.docx`, `.csv`, `.json`, `.txt`, `.md`)
-- Splits them into chunks
-- Stores the chunks in a Chroma vector database
-- Uses a deterministic local embedding model and a mock answer step so it works offline
-- Uses LangGraph to run a two-step flow:
-  - retrieve relevant chunks
-  - generate an answer from the retrieved context
+- Loads OKF markdown files from `data/knowledge` and parses YAML front matter before chunking
+- Supports additional source files from `data/sample_docs` by extension (`.pdf`, `.docx`, `.csv`, `.json`, `.txt`, `.md`)
+- Splits documents into chunks
+- Creates local deterministic embeddings for chunks
+- Stores chunks in a configurable vector database provider (currently Chroma)
+- Uses LangGraph to run retrieval, prompt augmentation, generation, and response stages
 
 ## Step by Step
 
@@ -39,7 +38,7 @@ If you want to experiment, you can still copy `.env.example` to `.env`, but it i
 python src\ingest.py
 ```
 
-This reads the files in `data/sample_docs` and creates the local Chroma database in `data/chroma_db`.
+This reads OKF files in `data/knowledge` (plus optional files in `data/sample_docs`) and creates the local Chroma database in `data/chroma_db`.
 If you run it again, the demo store is rebuilt from scratch so you do not get duplicate chunks.
 
 Supported input file types for ingest:
@@ -55,7 +54,7 @@ If a file cannot be parsed (for example, missing optional parser dependency or m
 ### 5. Run the chat app
 
 ```powershell
-python src\app.py
+python src\basic_task1.py
 ```
 
 Ask a question like:
@@ -72,17 +71,20 @@ Ask a question like:
 
 ## Project Files
 
-- `src/ingest.py` builds the vector store
-- `src/rag_graph.py` defines the LangGraph workflow
-- `src/app.py` starts a simple CLI chat loop
-- `data/sample_docs/` holds the learning documents
+- `src/okf.py` parses OKF YAML front matter and markdown bodies
+- `src/ingest.py` implements RAG stages 1-4 (sources, chunking, embeddings, vector store)
+- `src/rag_graph.py` implements RAG stages 5-8 (retrieval, augmented prompt, generation, response)
+- `src/basic_task1.py` starts a simple CLI chat loop
+- `data/knowledge/` holds OKF knowledge files
+- `data/sample_docs/` holds extra learning documents
 
 ## Learning Flow
 
-1. Read the sample documents.
-2. Chunk them into smaller pieces.
-3. Create embeddings.
-4. Store them in Chroma.
-5. Retrieve the top matches for a question.
-6. Send the context to the mock answer step.
-7. Return the answer with the source names.
+1. Read source files from configured data sources.
+2. Parse OKF YAML front matter and markdown body (for `data/knowledge/*.md`).
+3. Chunk into smaller coherent pieces.
+4. Create embeddings.
+5. Store in the vector database.
+6. Retrieve top matches for a question.
+7. Build an augmented prompt from question + context.
+8. Generate and return the answer with source names.
