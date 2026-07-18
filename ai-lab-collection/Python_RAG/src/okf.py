@@ -1,4 +1,5 @@
 from pathlib import Path
+from datetime import date, datetime
 from typing import Any
 
 import yaml
@@ -7,6 +8,23 @@ from langchain_core.documents import Document
 
 class OKFParseError(ValueError):
     pass
+
+
+def _normalize_metadata_value(value: Any) -> Any:
+    """Convert YAML metadata values into vectorstore-safe scalar/list values."""
+    if value is None or isinstance(value, (str, int, float, bool)):
+        return value
+    if isinstance(value, (date, datetime)):
+        return value.isoformat()
+    if isinstance(value, dict):
+        return yaml.safe_dump(value, sort_keys=False).strip()
+    if isinstance(value, (list, tuple, set)):
+        return [_normalize_metadata_value(item) for item in value]
+    return str(value)
+
+
+def _normalize_metadata(metadata: dict[str, Any]) -> dict[str, Any]:
+    return {key: _normalize_metadata_value(value) for key, value in metadata.items()}
 
 
 def split_okf_front_matter(markdown_text: str) -> tuple[str, str]:
@@ -44,12 +62,14 @@ def load_okf_document(file_path: Path) -> Document:
     raw_text = file_path.read_text(encoding="utf-8")
     front_matter, body = parse_okf_markdown(raw_text)
 
-    metadata = {
+    metadata = _normalize_metadata(
+        {
         "source": str(file_path),
         "name": file_path.name,
         "extension": file_path.suffix.lower(),
         "okf": True,
         **front_matter,
-    }
+        }
+    )
 
     return Document(page_content=body, metadata=metadata)

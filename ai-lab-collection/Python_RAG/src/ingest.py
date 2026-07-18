@@ -1,8 +1,16 @@
 import shutil
+import warnings
 from pathlib import Path
 from typing import Iterable
 
 from dotenv import load_dotenv
+
+warnings.filterwarnings(
+    "ignore",
+    message=r"`langchain-community` is being sunset.*",
+    category=DeprecationWarning,
+)
+
 from langchain_chroma import Chroma
 from langchain_community.document_loaders import (
     CSVLoader,
@@ -11,6 +19,7 @@ from langchain_community.document_loaders import (
     PyPDFLoader,
     TextLoader,
 )
+from langchain_community.vectorstores.utils import filter_complex_metadata
 from langchain_core.documents import Document
 from langchain_core.embeddings import Embeddings
 
@@ -204,6 +213,7 @@ def build_vectorstore() -> Chroma:
         raise RuntimeError("No supported files found in configured data sources")
 
     chunked_documents = chunk_documents(documents)
+    chunked_documents = filter_complex_metadata(chunked_documents)
     embedding_function = create_embedding_function()
     vectors = embed_chunks(chunked_documents, embedding_function)
     return store_embeddings(chunked_documents, vectors, embedding_function)
