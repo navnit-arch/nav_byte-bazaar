@@ -1,0 +1,64 @@
+﻿namespace AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Commands;
+
+/// <summary>
+/// Command to delete a company (soft delete).
+/// </summary>
+public class DeleteCompanyCommand : IRequest<ApiResponse>
+{
+    /// <summary>
+    /// Company ID to delete.
+    /// </summary>
+    public string CompanyId { get; set; } = string.Empty;
+
+    /// <summary>
+    /// User ID performing the operation.
+    /// </summary>
+    public string? UserId { get; set; }
+}
+
+/// <summary>
+/// Handler for deleting a company.
+/// </summary>
+public class DeleteCompanyCommandHandler : IRequestHandler<DeleteCompanyCommand, ApiResponse>
+{
+    private readonly MongoDbRepository<Company> _repository;
+    private readonly ILogger<DeleteCompanyCommandHandler> _logger;
+    private readonly IUnitOfWork _unitOfWork;
+
+    public DeleteCompanyCommandHandler(
+        MongoDbContext context,
+        ILogger<DeleteCompanyCommandHandler> logger,
+        IUnitOfWork unitOfWork)
+    {
+        _repository = new MongoDbRepository<Company>(context, logger);
+        _logger = logger;
+        _unitOfWork = unitOfWork;
+    }
+
+    public async Task<ApiResponse> Handle(
+        DeleteCompanyCommand request,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            _logger.LogInformation("Deleting company: {CompanyId}", request.CompanyId);
+
+            var exists = await _repository.ExistsAsync(request.CompanyId, cancellationToken);
+            if (!exists)
+            {
+                return ApiResponse.FailureResponse($"Company with ID '{request.CompanyId}' not found");
+            }
+
+            await _repository.DeleteAsync(request.CompanyId, cancellationToken);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+            _logger.LogInformation("Company deleted successfully: {CompanyId}", request.CompanyId);
+            return ApiResponse.SuccessResponse("Company deleted successfully");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error deleting company: {CompanyId}", request.CompanyId);
+            return ApiResponse.FailureResponse("An error occurred while deleting the company");
+        }
+    }
+}

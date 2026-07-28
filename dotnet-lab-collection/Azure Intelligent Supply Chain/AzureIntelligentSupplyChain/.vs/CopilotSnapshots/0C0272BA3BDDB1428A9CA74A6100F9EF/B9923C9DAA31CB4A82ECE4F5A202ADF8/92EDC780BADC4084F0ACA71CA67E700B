@@ -1,0 +1,51 @@
+﻿namespace AzureIntelligentSupplyChain.Core.Domain.Interfaces;
+
+/// <summary>
+/// Generic repository interface for data access operations.
+/// </summary>
+/// <typeparam name="TEntity">The entity type.</typeparam>
+/// <typeparam name="TId">The entity ID type.</typeparam>
+public interface IRepository<TEntity, in TId> where TEntity : Entity
+{
+    /// <summary>
+    /// Gets an entity by its ID asynchronously.
+    /// </summary>
+    Task<TEntity?> GetByIdAsync(TId id, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Gets all entities asynchronously.
+    /// </summary>
+    Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Adds a new entity asynchronously.
+    /// </summary>
+    Task AddAsync(TEntity entity, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Updates an existing entity asynchronously.
+    /// </summary>
+    Task UpdateAsync(TEntity entity, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Deletes an entity asynchronously (soft delete).
+    /// </summary>
+    Task DeleteAsync(TId id, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Checks if an entity exists by ID asynchronously.
+    /// </summary>
+    Task<bool> ExistsAsync(TId id, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Gets entities based on a specification asynchronously.
+    /// </summary>
+    Task<IEnumerable<TEntity>> GetBySpecificationAsync(
+        Specification specification,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Counts entities based on a specification asynchronously.
+    /// </summary>
+    Task<int> CountAsync(Specification? specification = null, CancellationToken cancellationToken = default);
+}

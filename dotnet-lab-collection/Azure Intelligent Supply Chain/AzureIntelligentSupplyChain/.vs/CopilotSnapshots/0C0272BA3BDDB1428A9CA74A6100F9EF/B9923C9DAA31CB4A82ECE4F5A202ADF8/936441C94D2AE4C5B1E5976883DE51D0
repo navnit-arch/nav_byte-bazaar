@@ -1,0 +1,109 @@
+﻿namespace AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Commands;
+
+/// <summary>
+/// Command to update an existing company.
+/// </summary>
+public class UpdateCompanyCommand : IRequest<ApiResponse<CompanyDto>>
+{
+    /// <summary>
+    /// Company ID to update.
+    /// </summary>
+    public string CompanyId { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Updated company details.
+    /// </summary>
+    public UpdateCompanyDto Company { get; set; } = null!;
+
+    /// <summary>
+    /// User ID performing the operation.
+    /// </summary>
+    public string? UserId { get; set; }
+}
+
+/// <summary>
+/// Handler for updating a company.
+/// </summary>
+public class UpdateCompanyCommandHandler : IRequestHandler<UpdateCompanyCommand, ApiResponse<CompanyDto>>
+{
+    private readonly IRepositoryFactory _repositoryFactory;
+    private readonly IMapper _mapper;
+    private readonly ILogger<UpdateCompanyCommandHandler> _logger;
+    private readonly IUnitOfWork _unitOfWork;
+
+    public UpdateCompanyCommandHandler(
+        IRepositoryFactory repositoryFactory,
+        IMapper mapper,
+        ILogger<UpdateCompanyCommandHandler> logger,
+        IUnitOfWork unitOfWork)
+    {
+        _repositoryFactory = repositoryFactory;
+        _mapper = mapper;
+        _logger = logger;
+        _unitOfWork = unitOfWork;
+    }
+
+    public async Task<ApiResponse<CompanyDto>> Handle(
+        UpdateCompanyCommand request,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            _logger.LogInformation("Updating company: {CompanyId}", request.CompanyId);
+
+            // Get existing company
+            var company = await _repository.GetByIdAsync(request.CompanyId, cancellationToken);
+            if (company == null)
+            {
+                return ApiResponse<CompanyDto>.FailureResponse($"Company with ID '{request.CompanyId}' not found");
+            }
+
+            // Convert DTOs to value objects
+            var headquarters = request.Company.Headquarters == null ? null :
+                new Address(
+                    request.Company.Headquarters.Street,
+                    request.Company.Headquarters.City,
+                    request.Company.Headquarters.State,
+                    request.Company.Headquarters.PostalCode,
+                    request.Company.Headquarters.Country);
+
+            var contact = request.Company.Contact == null ? null :
+                new ContactInfo(
+                    request.Company.Contact.Email,
+                    request.Company.Contact.Phone,
+                    request.Company.Contact.Website);
+
+            // Update company
+            company.Update(
+                request.Company.Name,
+                request.Company.Description,
+                headquarters,
+                contact,
+                request.Company.Industry,
+                request.Company.NumberOfEmployees,
+                request.Company.AnnualRevenue,
+                request.Company.LogoUrl);
+
+            company.UpdatedBy = request.UserId;
+
+            // Save changes
+            await _repository.UpdateAsync(company, cancellationToken);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+            var result = _mapper.Map<CompanyDto>(company);
+            _logger.LogInformation("Company updated successfully: {CompanyId}", request.CompanyId);
+
+            return ApiResponse<CompanyDto>.SuccessResponse(result, "Company updated successfully");
+        }
+        catch (BusinessRuleException ex)
+        {
+            _logger.LogWarning(ex, "Business rule violation while updating company: {CompanyId}", request.CompanyId);
+            return ApiResponse<CompanyDto>.FailureResponse(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error updating company: {CompanyId}", request.CompanyId);
+            return ApiResponse<CompanyDto>.FailureResponse("An error occurred while updating the company");
+        }
+    }
+}

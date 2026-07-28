@@ -1,0 +1,30 @@
+namespace AzureIntelligentSupplyChain.Infrastructure.Persistence.MongoDb;
+
+/// <summary>
+/// Factory for creating repositories with proper dependency injection.
+/// </summary>
+public interface IRepositoryFactory
+{
+    IRepository<TEntity, string> CreateRepository<TEntity>() where TEntity : Entity;
+}
+
+/// <summary>
+/// MongoDB repository factory implementation.
+/// </summary>
+public class MongoDbRepositoryFactory : IRepositoryFactory
+{
+    private readonly MongoDbContext _context;
+    private readonly ILoggerFactory _loggerFactory;
+
+    public MongoDbRepositoryFactory(MongoDbContext context, ILoggerFactory loggerFactory)
+    {
+        _context = context;
+        _loggerFactory = loggerFactory;
+    }
+
+    public IRepository<TEntity, string> CreateRepository<TEntity>() where TEntity : Entity
+    {
+        var logger = _loggerFactory.CreateLogger<MongoDbRepository<TEntity>>();
+        return new MongoDbRepository<TEntity>(_context, logger);
+    }
+}

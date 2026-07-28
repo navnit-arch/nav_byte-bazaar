@@ -1,0 +1,186 @@
+﻿namespace AzureIntelligentSupplyChain.Modules.CompanyManagement.Api.Controllers;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using AzureIntelligentSupplyChain.Core.Application.Common.Models;
+using AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos;
+
+/// <summary>
+/// Company management endpoints.
+/// </summary>
+[ApiController]
+[Route("api/v1/[controller]")]
+[Authorize]
+[Produces("application/json")]
+public class CompaniesController : ControllerBase
+{
+    private readonly IMediator _mediator;
+    private readonly ILogger<CompaniesController> _logger;
+
+    public CompaniesController(IMediator mediator, ILogger<CompaniesController> logger)
+    {
+        _mediator = mediator;
+        _logger = logger;
+    }
+
+    /// <summary>
+    /// Creates a new company.
+    /// </summary>
+    /// <param name="request">Company details.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>Created company.</returns>
+    [HttpPost]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<ActionResult<ApiResponse<CompanyDto>>> CreateCompany(
+        [FromBody] CreateCompanyDto request,
+        CancellationToken cancellationToken)
+    {
+        _logger.LogInformation("Creating company: {CompanyName}", request.Name);
+
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var command = new CreateCompanyCommand
+        {
+            Company = request,
+            UserId = userId
+        };
+
+        var result = await _mediator.Send(command, cancellationToken);
+
+        if (result.Success)
+        {
+            return CreatedAtAction(nameof(GetCompanyById), new { id = result.Data?.Id }, result);
+        }
+
+        return BadRequest(result);
+    }
+
+    /// <summary>
+    /// Gets a company by ID.
+    /// </summary>
+    /// <param name="id">Company ID.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>Company details.</returns>
+    [HttpGet("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<ActionResult<ApiResponse<CompanyDto>>> GetCompanyById(
+        [FromRoute] string id,
+        CancellationToken cancellationToken)
+    {
+        _logger.LogInformation("Getting company: {CompanyId}", id);
+
+        var query = new GetCompanyByIdQuery(id);
+        var result = await _mediator.Send(query, cancellationToken);
+
+        if (!result.Success)
+        {
+            return NotFound(result);
+        }
+
+        return Ok(result);
+    }
+
+    /// <summary>
+    /// Gets all companies with pagination.
+    /// </summary>
+    /// <param name="pageNumber">Page number (1-based).</param>
+    /// <param name="pageSize">Page size.</param>
+    /// <param name="statusFilter">Company status filter (optional).</param>
+    /// <param name="companyTypeFilter">Company type filter (optional).</param>
+    /// <param name="searchTerm">Search term.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>Paginated list of companies.</returns>
+    [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<ActionResult<ApiResponse<PagedResponse<CompanyDto>>>> GetAllCompanies(
+        [FromQuery] int pageNumber = 1,
+        [FromQuery] int pageSize = 10,
+        [FromQuery] int? statusFilter = null,
+        [FromQuery] int? companyTypeFilter = null,
+        [FromQuery] string? searchTerm = null,
+        CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Getting all companies - Page: {PageNumber}, Size: {PageSize}", 
+            pageNumber, pageSize);
+
+        var query = new GetAllCompaniesQuery
+        {
+            PageNumber = Math.Max(1, pageNumber),
+            PageSize = Math.Min(pageSize, 100),
+            StatusFilter = statusFilter,
+            CompanyTypeFilter = companyTypeFilter,
+            SearchTerm = searchTerm
+        };
+
+        var result = await _mediator.Send(query, cancellationToken);
+        return Ok(result);
+    }
+
+    /// <summary>
+    /// Updates a company.
+    /// </summary>
+    /// <param name="id">Company ID.</param>
+    /// <param name="request">Updated company details.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>Updated company.</returns>
+    [HttpPut("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<ActionResult<ApiResponse<CompanyDto>>> UpdateCompany(
+        [FromRoute] string id,
+        [FromBody] UpdateCompanyDto request,
+        CancellationToken cancellationToken)
+    {
+        _logger.LogInformation("Updating company: {CompanyId}", id);
+
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var command = new UpdateCompanyCommand
+        {
+            CompanyId = id,
+            Company = request,
+            UserId = userId
+        };
+
+        var result = await _mediator.Send(command, cancellationToken);
+
+        if (!result.Success)
+        {
+            return BadRequest(result);
+        }
+
+        return Ok(result);
+    }
+
+    /// <summary>
+    /// Deletes a company (soft delete).
+    /// </summary>
+    /// <param name="id">Company ID.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>Success response.</returns>
+    [HttpDelete("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<ActionResult<ApiResponse>> DeleteCompany(
+        [FromRoute] string id,
+        CancellationToken cancellationToken)
+    {
+        _logger.LogInformation("Deleting company: {CompanyId}", id);
+
+        var command = new DeleteCompanyCommand { CompanyId = id };
+        var result = await _mediator.Send(command, cancellationToken);
+
+        if (!result.Success)
+        {
+            return BadRequest(result);
+        }
+
+        return Ok(result);
+    }
+}

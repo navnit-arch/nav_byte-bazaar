@@ -1,0 +1,45 @@
+﻿namespace AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Mappings;
+
+/// <summary>
+/// AutoMapper profile for Company module.
+/// </summary>
+public class CompanyMappingProfile : Profile
+{
+    public CompanyMappingProfile()
+    {
+        // Address mappings
+        CreateMap<Address, AddressDto>().ReverseMap();
+
+        // Contact info mappings
+        CreateMap<ContactInfo, ContactInfoDto>().ReverseMap();
+
+        // Bank account mappings
+        CreateMap<BankAccount, BankAccountDto>().ReverseMap();
+
+        // Company mappings
+        CreateMap<Company, CompanyDto>()
+            .ForMember(dest => dest.Status, opt => opt.MapFrom(src => (int)src.Status))
+            .ForMember(dest => dest.CompanyType, opt => opt.MapFrom(src => (int)src.CompanyType));
+
+        CreateMap<CreateCompanyDto, Company>()
+            .ConstructUsing(src => new Company(
+                src.Name,
+                src.RegistrationNumber,
+                src.TaxNumber,
+                (CompanyType)src.CompanyType,
+                src.Headquarters == null ? null : new Address(
+                    src.Headquarters.Street,
+                    src.Headquarters.City,
+                    src.Headquarters.State,
+                    src.Headquarters.PostalCode,
+                    src.Headquarters.Country),
+                src.Contact == null ? null : new ContactInfo(
+                    src.Contact.Email,
+                    src.Contact.Phone,
+                    src.Contact.Website),
+                src.Description,
+                src.Industry,
+                src.NumberOfEmployees,
+                src.AnnualRevenue));
+    }
+}

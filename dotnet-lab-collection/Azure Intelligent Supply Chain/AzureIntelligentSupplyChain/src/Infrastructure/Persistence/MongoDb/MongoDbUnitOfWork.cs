@@ -1,0 +1,90 @@
+namespace AzureIntelligentSupplyChain.Infrastructure.Persistence.MongoDb;
+
+/// <summary>
+/// Unit of Work implementation for MongoDB.
+/// </summary>
+public class MongoDbUnitOfWork : IUnitOfWork
+{
+    private readonly MongoDbContext _context;
+    private readonly ILogger<MongoDbUnitOfWork> _logger;
+    private IClientSessionHandle? _session;
+
+    public MongoDbUnitOfWork(MongoDbContext context, ILogger<MongoDbUnitOfWork> logger)
+    {
+        _context = context;
+        _logger = logger;
+    }
+
+    public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            _logger.LogInformation("Saving changes to the database");
+            // MongoDB operations are auto-committed; return success
+            return 1;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error saving changes to the database");
+            throw;
+        }
+    }
+
+    public async Task BeginTransactionAsync(CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            _logger.LogInformation("Beginning database transaction");
+            var client = _context.GetDatabase().Client;
+            _session = await client.StartSessionAsync(cancellationToken: cancellationToken);
+            _session.StartTransaction();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error beginning transaction");
+            throw;
+        }
+    }
+
+    public async Task CommitTransactionAsync(CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            if (_session != null)
+            {
+                _logger.LogInformation("Committing database transaction");
+                await _session.CommitTransactionAsync(cancellationToken);
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error committing transaction");
+            throw;
+        }
+    }
+
+    public async Task RollbackTransactionAsync(CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            if (_session != null)
+            {
+                _logger.LogInformation("Rolling back database transaction");
+                await _session.AbortTransactionAsync(cancellationToken);
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error rolling back transaction");
+            throw;
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_session != null)
+        {
+            _session.Dispose();
+        }
+    }
+}

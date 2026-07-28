@@ -1,0 +1,61 @@
+﻿namespace AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Queries;
+
+/// <summary>
+/// Query to get a company by ID.
+/// </summary>
+public class GetCompanyByIdQuery : IRequest<ApiResponse<CompanyDto>>
+{
+    /// <summary>
+    /// Company ID.
+    /// </summary>
+    public string CompanyId { get; set; } = string.Empty;
+
+    public GetCompanyByIdQuery(string companyId)
+    {
+        CompanyId = companyId;
+    }
+}
+
+/// <summary>
+/// Handler for getting a company by ID.
+/// </summary>
+public class GetCompanyByIdQueryHandler : IRequestHandler<GetCompanyByIdQuery, ApiResponse<CompanyDto>>
+{
+    private readonly MongoDbRepository<Company> _repository;
+    private readonly IMapper _mapper;
+    private readonly ILogger<GetCompanyByIdQueryHandler> _logger;
+
+    public GetCompanyByIdQueryHandler(
+        MongoDbContext context,
+        IMapper mapper,
+        ILogger<GetCompanyByIdQueryHandler> logger)
+    {
+        _repository = new MongoDbRepository<Company>(context, logger);
+        _mapper = mapper;
+        _logger = logger;
+    }
+
+    public async Task<ApiResponse<CompanyDto>> Handle(
+        GetCompanyByIdQuery request,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            _logger.LogInformation("Getting company: {CompanyId}", request.CompanyId);
+
+            var company = await _repository.GetByIdAsync(request.CompanyId, cancellationToken);
+            if (company == null)
+            {
+                return ApiResponse<CompanyDto>.FailureResponse($"Company with ID '{request.CompanyId}' not found");
+            }
+
+            var result = _mapper.Map<CompanyDto>(company);
+            return ApiResponse<CompanyDto>.SuccessResponse(result);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error getting company: {CompanyId}", request.CompanyId);
+            return ApiResponse<CompanyDto>.FailureResponse("An error occurred while retrieving the company");
+        }
+    }
+}

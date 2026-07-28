@@ -1,0 +1,206 @@
+﻿namespace AzureIntelligentSupplyChain.Infrastructure.Persistence.MongoDb;
+
+/// <summary>
+/// Generic MongoDB repository implementation.
+/// </summary>
+/// <typeparam name="TEntity">The entity type.</typeparam>
+public class MongoDbRepository<TEntity> : IRepository<TEntity, string> where TEntity : Entity
+{
+    protected readonly IMongoCollection<TEntity> _collection;
+    protected readonly ILogger<MongoDbRepository<TEntity>> _logger;
+
+    public MongoDbRepository(MongoDbContext context, ILogger<MongoDbRepository<TEntity>> logger)
+    {
+        _collection = context.GetCollection<TEntity>(typeof(TEntity).Name);
+        _logger = logger;
+    }
+
+    public virtual async Task<TEntity?> GetByIdAsync(string id, CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            _logger.LogInformation("Getting {Entity} by ID: {Id}", typeof(TEntity).Name, id);
+            var filter = Builders<TEntity>.Filter.And(
+                Builders<TEntity>.Filter.Eq(x => x.Id, id),
+                Builders<TEntity>.Filter.Eq(x => x.IsDeleted, false)
+            );
+            return await _collection.Find(filter).FirstOrDefaultAsync(cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error getting {Entity} by ID: {Id}", typeof(TEntity).Name, id);
+            throw;
+        }
+    }
+
+    public virtual async Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            _logger.LogInformation("Getting all {Entity}", typeof(TEntity).Name);
+            var filter = Builders<TEntity>.Filter.Eq(x => x.IsDeleted, false);
+            return await _collection.Find(filter).ToListAsync(cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error getting all {Entity}", typeof(TEntity).Name);
+            throw;
+        }
+    }
+
+    public virtual async Task AddAsync(TEntity entity, CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            _logger.LogInformation("Adding new {Entity} with ID: {Id}", typeof(TEntity).Name, entity.Id);
+            entity.CreatedAt = DateTime.UtcNow;
+            entity.Version = 1;
+            await _collection.InsertOneAsync(entity, cancellationToken: cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error adding {Entity}", typeof(TEntity).Name);
+            throw;
+        }
+    }
+
+    public virtual async Task UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            _logger.LogInformation("Updating {Entity} with ID: {Id}", typeof(TEntity).Name, entity.Id);
+            entity.UpdatedAt = DateTime.UtcNow;
+            entity.Version++;
+
+            var filter = Builders<TEntity>.Filter.And(
+                Builders<TEntity>.Filter.Eq(x => x.Id, entity.Id),
+                Builders<TEntity>.Filter.Eq(x => x.Version, entity.Version - 1)
+            );
+
+            var result = await _collection.ReplaceOneAsync(filter, entity, 
+                new ReplaceOptions { IsUpsert = false }, cancellationToken);
+
+            if (result.MatchedCount == 0)
+            {
+                throw new BusinessRuleException(
+                    $"Concurrency conflict: {typeof(TEntity).Name} with ID '{entity.Id}' was modified by another user.",
+                    "CONCURRENCY_CONFLICT");
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error updating {Entity} with ID: {Id}", typeof(TEntity).Name, entity.Id);
+            throw;
+        }
+    }
+
+    public virtual async Task DeleteAsync(string id, CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            _logger.LogInformation("Deleting {Entity} with ID: {Id}", typeof(TEntity).Name, id);
+            var filter = Builders<TEntity>.Filter.Eq(x => x.Id, id);
+            var update = Builders<TEntity>.Update
+                .Set(x => x.IsDeleted, true)
+                .Set(x => x.DeletedAt, DateTime.UtcNow);
+
+            var result = await _collection.UpdateOneAsync(filter, update, cancellationToken: cancellationToken);
+
+            if (result.MatchedCount == 0)
+            {
+                throw new NotFoundException(typeof(TEntity).Name, id);
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error deleting {Entity} with ID: {Id}", typeof(TEntity).Name, id);
+            throw;
+        }
+    }
+
+    public virtual async Task<bool> ExistsAsync(string id, CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            var filter = Builders<TEntity>.Filter.And(
+                Builders<TEntity>.Filter.Eq(x => x.Id, id),
+                Builders<TEntity>.Filter.Eq(x => x.IsDeleted, false)
+            );
+            var count = await _collection.CountDocumentsAsync(filter, cancellationToken: cancellationToken);
+            return count > 0;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error checking existence of {Entity} with ID: {Id}", typeof(TEntity).Name, id);
+            throw;
+        }
+    }
+
+    public virtual async Task<IEnumerable<TEntity>> GetBySpecificationAsync(
+        Specification<TEntity> specification,
+        CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            _logger.LogInformation("Getting {Entity} by specification", typeof(TEntity).Name);
+
+            var filter = Builders<TEntity>.Filter.Eq(x => x.IsDeleted, false);
+
+            if (specification.Criteria != null)
+            {
+                filter = Builders<TEntity>.Filter.And(filter, 
+                    new ExpressionFilterDefinition<TEntity>(specification.Criteria));
+            }
+
+            var query = _collection.Find(filter);
+
+            if (specification.OrderBy != null)
+            {
+                var sortDefinition = Builders<TEntity>.Sort.Ascending(specification.OrderBy);
+                query = query.Sort(sortDefinition);
+            }
+            else if (specification.OrderByDescending != null)
+            {
+                var sortDefinition = Builders<TEntity>.Sort.Descending(specification.OrderByDescending);
+                query = query.Sort(sortDefinition);
+            }
+
+            if (specification.IsPagingEnabled)
+            {
+                if (specification.Skip.HasValue)
+                    query = query.Skip(specification.Skip.Value);
+                if (specification.Take.HasValue)
+                    query = query.Limit(specification.Take.Value);
+            }
+
+            return await query.ToListAsync(cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error getting {Entity} by specification", typeof(TEntity).Name);
+            throw;
+        }
+    }
+
+    public virtual async Task<int> CountAsync(Specification<TEntity>? specification = null, 
+        CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            var filter = Builders<TEntity>.Filter.Eq(x => x.IsDeleted, false);
+
+            if (specification?.Criteria != null)
+            {
+                filter = Builders<TEntity>.Filter.And(filter, 
+                    new ExpressionFilterDefinition<TEntity>(specification.Criteria));
+            }
+
+            return (int)await _collection.CountDocumentsAsync(filter, cancellationToken: cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error counting {Entity}", typeof(TEntity).Name);
+            throw;
+        }
+    }
+}

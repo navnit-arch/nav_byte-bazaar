@@ -1,0 +1,1179 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AzureIntelligentSupplyChain</name>
+    </assembly>
+    <members>
+        <member name="T:AzureIntelligentSupplyChain.Core.Application.Common.Dto.BaseDto">
+            <summary>
+            Base DTO class for responses.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Application.Common.Dto.BaseDto.Id">
+            <summary>
+            Unique identifier.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Application.Common.Dto.BaseDto.CreatedAt">
+            <summary>
+            Creation timestamp.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Application.Common.Dto.BaseDto.CreatedBy">
+            <summary>
+            User who created the entity.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Application.Common.Dto.BaseDto.UpdatedAt">
+            <summary>
+            Last update timestamp.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Application.Common.Dto.BaseDto.UpdatedBy">
+            <summary>
+            User who last updated the entity.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Application.Common.Dto.BaseDto.IsDeleted">
+            <summary>
+            Soft delete flag.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Application.Common.Dto.BaseDto.DeletedAt">
+            <summary>
+            Delete timestamp.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Application.Common.Dto.BaseDto.Version">
+            <summary>
+            Version for optimistic concurrency.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Core.Application.Common.Exceptions.BusinessRuleException">
+            <summary>
+            Exception thrown when a business rule is violated.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Application.Common.Exceptions.BusinessRuleException.ErrorCode">
+            <summary>
+            The error code.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Core.Application.Common.Exceptions.NotFoundException">
+            <summary>
+            Exception thrown when a requested resource is not found.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Core.Application.Common.Exceptions.ValidationException">
+            <summary>
+            Exception thrown when a validation error occurs.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Application.Common.Exceptions.ValidationException.Errors">
+            <summary>
+            Dictionary of validation errors.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Core.Application.Common.Models.ApiResponse`1">
+            <summary>
+            Standard API response wrapper.
+            </summary>
+            <typeparam name="T">The data type.</typeparam>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Application.Common.Models.ApiResponse`1.Success">
+            <summary>
+            Indicates if the operation was successful.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Application.Common.Models.ApiResponse`1.Message">
+            <summary>
+            Response message.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Application.Common.Models.ApiResponse`1.Data">
+            <summary>
+            Response data.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Application.Common.Models.ApiResponse`1.Errors">
+            <summary>
+            List of validation errors.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Application.Common.Models.ApiResponse`1.TraceId">
+            <summary>
+            Request ID for tracing.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Core.Application.Common.Models.ApiResponse">
+            <summary>
+            Standard API response wrapper for non-generic responses.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Application.Common.Models.ApiResponse.Success">
+            <summary>
+            Indicates if the operation was successful.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Application.Common.Models.ApiResponse.Message">
+            <summary>
+            Response message.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Application.Common.Models.ApiResponse.Errors">
+            <summary>
+            List of validation errors.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Application.Common.Models.ApiResponse.TraceId">
+            <summary>
+            Request ID for tracing.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Core.Application.Common.Models.PagedResponse`1">
+            <summary>
+            Paginated response wrapper.
+            </summary>
+            <typeparam name="T">The item type.</typeparam>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Application.Common.Models.PagedResponse`1.PageNumber">
+            <summary>
+            Current page number.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Application.Common.Models.PagedResponse`1.PageSize">
+            <summary>
+            Page size.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Application.Common.Models.PagedResponse`1.TotalItems">
+            <summary>
+            Total number of items.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Application.Common.Models.PagedResponse`1.TotalPages">
+            <summary>
+            Total number of pages.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Application.Common.Models.PagedResponse`1.Items">
+            <summary>
+            Items in the current page.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Application.Common.Models.PagedResponse`1.HasNextPage">
+            <summary>
+            Indicates if there's a next page.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Application.Common.Models.PagedResponse`1.HasPreviousPage">
+            <summary>
+            Indicates if there's a previous page.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Core.Domain.Common.AggregateRoot">
+            <summary>
+            Aggregate root base class for implementing DDD aggregate pattern.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Core.Domain.Common.AggregateRoot.GetDomainEvents">
+            <summary>
+            Gets the collection of uncommitted domain events.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Core.Domain.Common.AggregateRoot.AddDomainEvent(AzureIntelligentSupplyChain.Core.Domain.Common.DomainEvent)">
+            <summary>
+            Adds a domain event to the aggregate.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Core.Domain.Common.AggregateRoot.ClearDomainEvents">
+            <summary>
+            Clears all uncommitted domain events.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Core.Domain.Common.DomainEvent">
+            <summary>
+            Domain event base class for implementing the domain event pattern.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Domain.Common.DomainEvent.Id">
+            <summary>
+            Unique identifier for the domain event.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Domain.Common.DomainEvent.CreatedAt">
+            <summary>
+            Timestamp when the event occurred.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Domain.Common.DomainEvent.AggregateId">
+            <summary>
+            Event source or aggregate ID.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Domain.Common.DomainEvent.IsProcessed">
+            <summary>
+            Indicates if the event has been processed.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Core.Domain.Common.Entity">
+            <summary>
+            Base entity class for all domain entities following DDD principles.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Domain.Common.Entity.Id">
+            <summary>
+            Unique identifier for the entity.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Domain.Common.Entity.CreatedAt">
+            <summary>
+            Timestamp when the entity was created.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Domain.Common.Entity.CreatedBy">
+            <summary>
+            User who created the entity.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Domain.Common.Entity.UpdatedAt">
+            <summary>
+            Timestamp when the entity was last modified.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Domain.Common.Entity.UpdatedBy">
+            <summary>
+            User who last modified the entity.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Domain.Common.Entity.IsDeleted">
+            <summary>
+            Indicates whether the entity is deleted (soft delete).
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Domain.Common.Entity.DeletedAt">
+            <summary>
+            Timestamp when the entity was deleted.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Core.Domain.Common.Entity.Version">
+            <summary>
+            Version number for optimistic concurrency control.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Core.Domain.Common.Entity.Equals(System.Object)">
+            <summary>
+            Determines if two entities are equal by their ID.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Core.Domain.Common.Entity.GetHashCode">
+            <summary>
+            Gets hash code based on the entity's ID.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Core.Domain.Common.Specification`1">
+            <summary>
+            Base specification class for building queries with DDD principles.
+            </summary>
+            <typeparam name="TEntity">The entity type.</typeparam>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Core.Domain.Common.ValueObject">
+            <summary>
+            Base value object class following DDD principles.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Core.Domain.Common.ValueObject.GetEqualityComponents">
+            <summary>
+            Gets the equality components for value object comparison.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Core.Domain.Common.ValueObject.Equals(System.Object)">
+            <summary>
+            Determines equality based on all components.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Core.Domain.Common.ValueObject.GetHashCode">
+            <summary>
+            Gets hash code based on all components.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Core.Domain.Interfaces.IRepository`2">
+            <summary>
+            Generic repository interface for data access operations.
+            </summary>
+            <typeparam name="TEntity">The entity type.</typeparam>
+            <typeparam name="TId">The entity ID type.</typeparam>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Core.Domain.Interfaces.IRepository`2.GetByIdAsync(`1,System.Threading.CancellationToken)">
+            <summary>
+            Gets an entity by its ID asynchronously.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Core.Domain.Interfaces.IRepository`2.GetAllAsync(System.Threading.CancellationToken)">
+            <summary>
+            Gets all entities asynchronously.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Core.Domain.Interfaces.IRepository`2.AddAsync(`0,System.Threading.CancellationToken)">
+            <summary>
+            Adds a new entity asynchronously.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Core.Domain.Interfaces.IRepository`2.UpdateAsync(`0,System.Threading.CancellationToken)">
+            <summary>
+            Updates an existing entity asynchronously.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Core.Domain.Interfaces.IRepository`2.DeleteAsync(`1,System.Threading.CancellationToken)">
+            <summary>
+            Deletes an entity asynchronously (soft delete).
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Core.Domain.Interfaces.IRepository`2.ExistsAsync(`1,System.Threading.CancellationToken)">
+            <summary>
+            Checks if an entity exists by ID asynchronously.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Core.Domain.Interfaces.IRepository`2.GetBySpecificationAsync(AzureIntelligentSupplyChain.Core.Domain.Common.Specification{`0},System.Threading.CancellationToken)">
+            <summary>
+            Gets entities based on a specification asynchronously.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Core.Domain.Interfaces.IRepository`2.CountAsync(AzureIntelligentSupplyChain.Core.Domain.Common.Specification{`0},System.Threading.CancellationToken)">
+            <summary>
+            Counts entities based on a specification asynchronously.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Core.Domain.Interfaces.IUnitOfWork">
+            <summary>
+            Unit of Work pattern interface for managing transactions.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Core.Domain.Interfaces.IUnitOfWork.SaveChangesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Saves all changes to the database asynchronously.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Core.Domain.Interfaces.IUnitOfWork.BeginTransactionAsync(System.Threading.CancellationToken)">
+            <summary>
+            Begins a transaction asynchronously.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Core.Domain.Interfaces.IUnitOfWork.CommitTransactionAsync(System.Threading.CancellationToken)">
+            <summary>
+            Commits the current transaction asynchronously.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Core.Domain.Interfaces.IUnitOfWork.RollbackTransactionAsync(System.Threading.CancellationToken)">
+            <summary>
+            Rolls back the current transaction asynchronously.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Infrastructure.Configuration.AuthenticationOptions">
+            <summary>
+            Authentication configuration options.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Infrastructure.Configuration.AuthenticationOptions.Issuer">
+            <summary>
+            JWT issuer.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Infrastructure.Configuration.AuthenticationOptions.Audience">
+            <summary>
+            JWT audience.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Infrastructure.Configuration.AuthenticationOptions.SecretKey">
+            <summary>
+            JWT secret key.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Infrastructure.Configuration.AuthenticationOptions.TokenExpirationMinutes">
+            <summary>
+            Token expiration in minutes.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Infrastructure.Configuration.AuthenticationOptions.RefreshTokenExpirationDays">
+            <summary>
+            Refresh token expiration in days.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Infrastructure.Configuration.MongoDbOptions">
+            <summary>
+            MongoDB configuration options.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Infrastructure.Configuration.MongoDbOptions.ConnectionString">
+            <summary>
+            MongoDB connection string.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Infrastructure.Configuration.MongoDbOptions.DatabaseName">
+            <summary>
+            Database name.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Infrastructure.Configuration.MongoDbOptions.InitializeOnStartup">
+            <summary>
+            Indicates if the database should be initialized on startup.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Infrastructure.Extensions.ServiceCollectionExtensions">
+            <summary>
+            Extension methods for registering infrastructure services.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Infrastructure.Extensions.ServiceCollectionExtensions.AddMongoDb(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Adds MongoDB services to the DI container.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Infrastructure.Extensions.ServiceCollectionExtensions.AddApplicationServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Adds application services to the DI container.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Infrastructure.Extensions.ServiceCollectionExtensions.AddJwtAuthentication(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Adds authentication services to the DI container.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Infrastructure.Extensions.ServiceCollectionExtensions.AddLogging(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Adds logging services to the DI container.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Infrastructure.Extensions.ServiceCollectionExtensions.AddSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds Swagger/OpenAPI documentation.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Infrastructure.Extensions.ServiceCollectionExtensions.AddCorsPolicy(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Adds CORS configuration.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Infrastructure.Persistence.MongoDb.BsonCollectionAttribute">
+            <summary>
+            Attribute to specify the MongoDB collection name for an entity.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Infrastructure.Persistence.MongoDb.BsonCollectionAttribute.CollectionName">
+            <summary>
+            Collection name.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Infrastructure.Persistence.MongoDb.MongoDbContext">
+            <summary>
+            MongoDB context for managing database connections and collections.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Infrastructure.Persistence.MongoDb.MongoDbContext.GetCollection``1(System.String)">
+            <summary>
+            Gets a MongoDB collection by name.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Infrastructure.Persistence.MongoDb.MongoDbContext.GetDatabase">
+            <summary>
+            Gets the MongoDB database instance.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Infrastructure.Persistence.MongoDb.MongoDbContext.CreateIndexesAsync``1(System.String,System.Collections.Generic.List{MongoDB.Driver.CreateIndexModel{``0}})">
+            <summary>
+            Creates indexes for a collection.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Infrastructure.Persistence.MongoDb.MongoDbContext.DropCollectionAsync(System.String)">
+            <summary>
+            Drops a collection.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Infrastructure.Persistence.MongoDb.MongoDbContext.CollectionExistsAsync(System.String)">
+            <summary>
+            Checks if a collection exists.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Infrastructure.Persistence.MongoDb.MongoDbRepository`1">
+            <summary>
+            Generic MongoDB repository implementation.
+            </summary>
+            <typeparam name="TEntity">The entity type.</typeparam>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Infrastructure.Persistence.MongoDb.IRepositoryFactory">
+            <summary>
+            Factory for creating repositories with proper dependency injection.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Infrastructure.Persistence.MongoDb.MongoDbRepositoryFactory">
+            <summary>
+            MongoDB repository factory implementation.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Infrastructure.Persistence.MongoDb.MongoDbUnitOfWork">
+            <summary>
+            Unit of Work implementation for MongoDB.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Api.Controllers.CompaniesController">
+            <summary>
+            Company management endpoints.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Modules.CompanyManagement.Api.Controllers.CompaniesController.CreateCompany(AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.CreateCompanyDto,System.Threading.CancellationToken)">
+            <summary>
+            Creates a new company.
+            </summary>
+            <param name="request">Company details.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>Created company.</returns>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Modules.CompanyManagement.Api.Controllers.CompaniesController.GetCompanyById(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets a company by ID.
+            </summary>
+            <param name="id">Company ID.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>Company details.</returns>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Modules.CompanyManagement.Api.Controllers.CompaniesController.GetAllCompanies(System.Int32,System.Int32,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets all companies with pagination.
+            </summary>
+            <param name="pageNumber">Page number (1-based).</param>
+            <param name="pageSize">Page size.</param>
+            <param name="statusFilter">Company status filter (optional).</param>
+            <param name="companyTypeFilter">Company type filter (optional).</param>
+            <param name="searchTerm">Search term.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>Paginated list of companies.</returns>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Modules.CompanyManagement.Api.Controllers.CompaniesController.UpdateCompany(System.String,AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.UpdateCompanyDto,System.Threading.CancellationToken)">
+            <summary>
+            Updates a company.
+            </summary>
+            <param name="id">Company ID.</param>
+            <param name="request">Updated company details.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>Updated company.</returns>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Modules.CompanyManagement.Api.Controllers.CompaniesController.DeleteCompany(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Deletes a company (soft delete).
+            </summary>
+            <param name="id">Company ID.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>Success response.</returns>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Commands.CreateCompanyCommand">
+            <summary>
+            Command to create a new company.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Commands.CreateCompanyCommand.Company">
+            <summary>
+            Company details to create.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Commands.CreateCompanyCommand.UserId">
+            <summary>
+            User ID performing the operation.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Commands.CreateCompanyCommandHandler">
+            <summary>
+            Handler for creating a company.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Commands.DeleteCompanyCommand">
+            <summary>
+            Command to delete a company (soft delete).
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Commands.DeleteCompanyCommand.CompanyId">
+            <summary>
+            Company ID to delete.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Commands.DeleteCompanyCommand.UserId">
+            <summary>
+            User ID performing the operation.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Commands.DeleteCompanyCommandHandler">
+            <summary>
+            Handler for deleting a company.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Commands.UpdateCompanyCommand">
+            <summary>
+            Command to update an existing company.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Commands.UpdateCompanyCommand.CompanyId">
+            <summary>
+            Company ID to update.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Commands.UpdateCompanyCommand.Company">
+            <summary>
+            Updated company details.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Commands.UpdateCompanyCommand.UserId">
+            <summary>
+            User ID performing the operation.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Commands.UpdateCompanyCommandHandler">
+            <summary>
+            Handler for updating a company.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.AddressDto">
+            <summary>
+            DTO for address information.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.AddressDto.Street">
+            <summary>
+            Street address.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.AddressDto.City">
+            <summary>
+            City.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.AddressDto.State">
+            <summary>
+            State/Province.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.AddressDto.PostalCode">
+            <summary>
+            Postal code.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.AddressDto.Country">
+            <summary>
+            Country.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.ContactInfoDto">
+            <summary>
+            DTO for contact information.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.ContactInfoDto.Email">
+            <summary>
+            Email address.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.ContactInfoDto.Phone">
+            <summary>
+            Phone number.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.ContactInfoDto.Website">
+            <summary>
+            Website URL.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.BankAccountDto">
+            <summary>
+            DTO for bank account information.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.BankAccountDto.AccountHolderName">
+            <summary>
+            Account holder name.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.BankAccountDto.AccountNumber">
+            <summary>
+            Account number.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.BankAccountDto.BankName">
+            <summary>
+            Bank name.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.BankAccountDto.IBAN">
+            <summary>
+            IBAN.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.BankAccountDto.SWIFTCode">
+            <summary>
+            SWIFT code.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.BankAccountDto.AccountType">
+            <summary>
+            Account type.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.BankAccountDto.IsDefault">
+            <summary>
+            Is default account.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.CreateCompanyDto">
+            <summary>
+            DTO for creating a company.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.CreateCompanyDto.Name">
+            <summary>
+            Company name.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.CreateCompanyDto.RegistrationNumber">
+            <summary>
+            Company registration number.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.CreateCompanyDto.TaxNumber">
+            <summary>
+            Tax identification number.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.CreateCompanyDto.CompanyType">
+            <summary>
+            Company type (1: Internal, 2: Supplier, 3: Customer, 4: Logistics, 5: Manufacturer).
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.CreateCompanyDto.Description">
+            <summary>
+            Company description.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.CreateCompanyDto.Headquarters">
+            <summary>
+            Headquarters address.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.CreateCompanyDto.Contact">
+            <summary>
+            Contact information.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.CreateCompanyDto.Industry">
+            <summary>
+            Industry classification.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.CreateCompanyDto.NumberOfEmployees">
+            <summary>
+            Number of employees.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.CreateCompanyDto.AnnualRevenue">
+            <summary>
+            Annual revenue.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.UpdateCompanyDto">
+            <summary>
+            DTO for updating a company.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.UpdateCompanyDto.Name">
+            <summary>
+            Company name.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.UpdateCompanyDto.Description">
+            <summary>
+            Company description.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.UpdateCompanyDto.Headquarters">
+            <summary>
+            Headquarters address.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.UpdateCompanyDto.Contact">
+            <summary>
+            Contact information.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.UpdateCompanyDto.Industry">
+            <summary>
+            Industry classification.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.UpdateCompanyDto.NumberOfEmployees">
+            <summary>
+            Number of employees.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.UpdateCompanyDto.AnnualRevenue">
+            <summary>
+            Annual revenue.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.UpdateCompanyDto.LogoUrl">
+            <summary>
+            Company logo URL.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.CompanyDto">
+            <summary>
+            DTO for company response.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.CompanyDto.Name">
+            <summary>
+            Company name.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.CompanyDto.RegistrationNumber">
+            <summary>
+            Company registration number.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.CompanyDto.TaxNumber">
+            <summary>
+            Tax identification number.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.CompanyDto.Description">
+            <summary>
+            Company description.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.CompanyDto.Headquarters">
+            <summary>
+            Headquarters address.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.CompanyDto.Contact">
+            <summary>
+            Contact information.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.CompanyDto.Status">
+            <summary>
+            Company status (1: Active, 2: Inactive, 3: Suspended, 4: Deleted).
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.CompanyDto.CompanyType">
+            <summary>
+            Company type (1: Internal, 2: Supplier, 3: Customer, 4: Logistics, 5: Manufacturer).
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.CompanyDto.Industry">
+            <summary>
+            Industry classification.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.CompanyDto.NumberOfEmployees">
+            <summary>
+            Number of employees.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.CompanyDto.AnnualRevenue">
+            <summary>
+            Annual revenue.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.CompanyDto.LogoUrl">
+            <summary>
+            Company logo URL.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos.CompanyDto.BankAccounts">
+            <summary>
+            Bank accounts.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Mappings.CompanyMappingProfile">
+            <summary>
+            AutoMapper profile for Company module.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Queries.GetAllCompaniesQuery">
+            <summary>
+            Query to get all companies with pagination.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Queries.GetAllCompaniesQuery.PageNumber">
+            <summary>
+            Page number (1-based).
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Queries.GetAllCompaniesQuery.PageSize">
+            <summary>
+            Page size.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Queries.GetAllCompaniesQuery.StatusFilter">
+            <summary>
+            Company status filter (optional).
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Queries.GetAllCompaniesQuery.CompanyTypeFilter">
+            <summary>
+            Company type filter (optional).
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Queries.GetAllCompaniesQuery.SearchTerm">
+            <summary>
+            Search term for name or registration number.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Queries.CompanySpecification">
+            <summary>
+            Specification for filtering companies.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Queries.GetAllCompaniesQueryHandler">
+            <summary>
+            Handler for getting all companies.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Queries.GetCompanyByIdQuery">
+            <summary>
+            Query to get a company by ID.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Queries.GetCompanyByIdQuery.CompanyId">
+            <summary>
+            Company ID.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Queries.GetCompanyByIdQueryHandler">
+            <summary>
+            Handler for getting a company by ID.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Validations.CreateCompanyDtoValidator">
+            <summary>
+            Validator for CreateCompanyDto.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Validations.UpdateCompanyDtoValidator">
+            <summary>
+            Validator for UpdateCompanyDto.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Validations.AddressDtoValidator">
+            <summary>
+            Validator for AddressDto.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Validations.ContactInfoDtoValidator">
+            <summary>
+            Validator for ContactInfoDto.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Validations.BankAccountDtoValidator">
+            <summary>
+            Validator for BankAccountDto.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.Address">
+            <summary>
+            Address value object.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.Address.Street">
+            <summary>
+            Street address.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.Address.City">
+            <summary>
+            City.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.Address.State">
+            <summary>
+            State/Province.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.Address.PostalCode">
+            <summary>
+            Postal code.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.Address.Country">
+            <summary>
+            Country.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.Company">
+            <summary>
+            Company aggregate root representing a company in the system.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.Company.Name">
+            <summary>
+            Company name.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.Company.RegistrationNumber">
+            <summary>
+            Company registration number.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.Company.TaxNumber">
+            <summary>
+            Tax identification number.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.Company.Description">
+            <summary>
+            Company description.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.Company.Headquarters">
+            <summary>
+            Headquarters address.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.Company.Contact">
+            <summary>
+            Contact information.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.Company.Status">
+            <summary>
+            Company status.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.Company.CompanyType">
+            <summary>
+            Company type.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.Company.Industry">
+            <summary>
+            Industry classification.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.Company.NumberOfEmployees">
+            <summary>
+            Number of employees.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.Company.AnnualRevenue">
+            <summary>
+            Annual revenue.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.Company.LogoUrl">
+            <summary>
+            Company logo URL.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.Company.BankAccounts">
+            <summary>
+            Bank account information.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.Company.#ctor(System.String,System.String,System.String,AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.CompanyType,AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.Address,AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.ContactInfo,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Decimal})">
+            <summary>
+            Creates a new company.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.Company.Update(System.String,System.String,AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.Address,AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.ContactInfo,System.String,System.Nullable{System.Int32},System.Nullable{System.Decimal},System.String)">
+            <summary>
+            Updates company information.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.Company.Activate">
+            <summary>
+            Activates the company.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.Company.Deactivate">
+            <summary>
+            Deactivates the company.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.Company.AddBankAccount(AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.BankAccount)">
+            <summary>
+            Adds a bank account.
+            </summary>
+        </member>
+        <member name="M:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.Company.RemoveBankAccount(System.String)">
+            <summary>
+            Removes a bank account.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.CompanyStatus">
+            <summary>
+            Company status enumeration.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.CompanyType">
+            <summary>
+            Company type enumeration.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.BankAccount">
+            <summary>
+            Bank account value object.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.BankAccount.AccountHolderName">
+            <summary>
+            Account holder name.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.BankAccount.AccountNumber">
+            <summary>
+            Account number.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.BankAccount.BankName">
+            <summary>
+            Bank name.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.BankAccount.IBAN">
+            <summary>
+            IBAN.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.BankAccount.SWIFTCode">
+            <summary>
+            SWIFT code.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.BankAccount.AccountType">
+            <summary>
+            Account type.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.BankAccount.IsDefault">
+            <summary>
+            Is default account.
+            </summary>
+        </member>
+        <member name="T:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.ContactInfo">
+            <summary>
+            Contact information value object.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.ContactInfo.Email">
+            <summary>
+            Email address.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.ContactInfo.Phone">
+            <summary>
+            Phone number.
+            </summary>
+        </member>
+        <member name="P:AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain.ContactInfo.Website">
+            <summary>
+            Website URL.
+            </summary>
+        </member>
+    </members>
+</doc>

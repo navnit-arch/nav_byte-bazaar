@@ -1,0 +1,31 @@
+﻿{
+  {
+    "Logging": {
+      "LogLevel": {
+        "Default": "Information",
+        "Microsoft.AspNetCore": "Warning"
+      }
+    },
+    "MongoDb": {
+      "ConnectionString": "mongodb+srv://user:password@cluster.mongodb.net/?retryWrites=true&w=majority",
+      "DatabaseName": "AzureIntelligentSupplyChain",
+      "InitializeOnStartup": true
+    },
+    "Authentication": {
+      "Issuer": "AzureIntelligentSupplyChain",
+      "Audience": "AzureIntelligentSupplyChainAPI",
+      "SecretKey": "your-secret-key-change-in-production-min-32-chars",
+      "TokenExpirationMinutes": 60,
+      "RefreshTokenExpirationDays": 7
+    },
+    "ApplicationInsights": {
+      "InstrumentationKey": ""
+    },
+    "Cors": {
+      "AllowedOrigins": [
+        "http://localhost:3000",
+        "http://localhost:3001"
+      ]
+    },
+    "AllowedHosts": "*"
+  }

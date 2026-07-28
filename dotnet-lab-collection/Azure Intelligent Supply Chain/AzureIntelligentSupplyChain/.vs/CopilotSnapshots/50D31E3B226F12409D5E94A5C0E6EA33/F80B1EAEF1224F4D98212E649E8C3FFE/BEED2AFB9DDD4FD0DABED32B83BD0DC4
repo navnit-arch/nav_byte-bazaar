@@ -1,0 +1,217 @@
+﻿namespace AzureIntelligentSupplyChain.Infrastructure.Extensions;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using MongoDB.Driver;
+using AutoMapper;
+using Serilog;
+using Microsoft.ApplicationInsights.AspNetCore.Extensions;
+using AzureIntelligentSupplyChain.Infrastructure.Persistence.MongoDb;
+using AzureIntelligentSupplyChain.Infrastructure.Configuration;
+using AzureIntelligentSupplyChain.Core.Domain.Interfaces;
+
+/// <summary>
+/// Extension methods for registering infrastructure services.
+/// </summary>
+public static class ServiceCollectionExtensions
+{
+    /// <summary>
+    /// Adds MongoDB services to the DI container.
+    /// </summary>
+    public static IServiceCollection AddMongoDb(
+        this IServiceCollection services,
+        IConfiguration configuration)
+    {
+        var mongoDbOptions = configuration.GetSection(MongoDbOptions.SectionName).Get<MongoDbOptions>()
+            ?? throw new InvalidOperationException("MongoDb configuration is missing");
+
+        services.Configure<MongoDbOptions>(configuration.GetSection(MongoDbOptions.SectionName));
+
+        // Register MongoDB client
+        services.AddSingleton<IMongoClient>(_ => new MongoClient(mongoDbOptions.ConnectionString));
+
+        // Register MongoDB context
+        services.AddScoped(sp =>
+        {
+            var mongoClient = sp.GetRequiredService<IMongoClient>();
+            return new MongoDbContext(mongoClient, mongoDbOptions.DatabaseName);
+        });
+
+        // Register Repository Factory
+        services.AddScoped<IRepositoryFactory, MongoDbRepositoryFactory>();
+
+        // Register Unit of Work
+        services.AddScoped<IUnitOfWork, MongoDbUnitOfWork>();
+
+        return services;
+    }
+
+    /// <summary>
+    /// Adds application services to the DI container.
+    /// </summary>
+    public static IServiceCollection AddApplicationServices(
+        this IServiceCollection services,
+        IConfiguration configuration)
+    {
+        // Add MediatR
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
+        // Add AutoMapper - scan current assembly for profiles
+        var mapperConfig = new MapperConfiguration(mc =>
+        {
+            mc.AddMaps(typeof(Program).Assembly);
+        });
+        services.AddSingleton(mapperConfig.CreateMapper());
+
+        // Add FluentValidation
+        services.AddValidatorsFromAssembly(typeof(Program).Assembly);
+
+        return services;
+    }
+
+    /// <summary>
+    /// Adds authentication services to the DI container.
+    /// </summary>
+    public static IServiceCollection AddJwtAuthentication(
+        this IServiceCollection services,
+        IConfiguration configuration)
+    {
+        var authOptions = configuration.GetSection(AuthenticationOptions.SectionName).Get<AuthenticationOptions>()
+            ?? throw new InvalidOperationException("Authentication configuration is missing");
+
+        services.Configure<AuthenticationOptions>(configuration.GetSection(AuthenticationOptions.SectionName));
+
+        var key = Encoding.ASCII.GetBytes(authOptions.SecretKey);
+
+        services
+            .AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = true,
+                    ValidIssuer = authOptions.Issuer,
+                    ValidateAudience = true,
+                    ValidAudience = authOptions.Audience,
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
+
+        services.AddAuthorization();
+
+        return services;
+    }
+
+    /// <summary>
+    /// Adds logging services to the DI container.
+    /// </summary>
+    public static IServiceCollection AddAppLogging(
+        this IServiceCollection services,
+        IConfiguration configuration)
+    {
+        Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Information()
+            .WriteTo.Console()
+            .WriteTo.File("logs/app-.txt", rollingInterval: RollingInterval.Day)
+            .Enrich.FromLogContext()
+            .Enrich.WithProperty("Application", "AzureIntelligentSupplyChain")
+            .CreateLogger();
+
+        services.AddSerilog();
+
+        // Add Application Insights if connection string is present
+        var appInsightsKey = configuration["ApplicationInsights:InstrumentationKey"];
+        if (!string.IsNullOrEmpty(appInsightsKey))
+        {
+            services.AddApplicationInsightsTelemetry(appInsightsKey);
+        }
+
+        return services;
+    }
+
+    /// <summary>
+    /// Adds Swagger/OpenAPI documentation.
+    /// </summary>
+    public static IServiceCollection AddSwagger(this IServiceCollection services)
+    {
+        services.AddEndpointsApiExplorer();
+        services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Title = "Azure Intelligent Supply Chain API",
+                Version = "v1",
+                Description = "Enterprise-grade Supply Chain Management Platform API",
+                Contact = new OpenApiContact
+                {
+                    Name = "Architecture Team",
+                    Url = new Uri("https://github.com/navnit-arch")
+                },
+                License = new OpenApiLicense
+                {
+                    Name = "MIT",
+                    Url = new Uri("https://opensource.org/licenses/MIT")
+                }
+            });
+
+            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                Type = SecuritySchemeType.Http,
+                Scheme = "bearer",
+                BearerFormat = "JWT",
+                Description = "JWT Authorization header using the Bearer scheme"
+            });
+
+            c.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
+                    },
+                    new string[] { }
+                }
+            });
+
+            var xmlFile = $"{typeof(Program).Assembly.GetName().Name}.xml";
+            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            if (File.Exists(xmlPath))
+            {
+                c.IncludeXmlComments(xmlPath);
+            }
+        });
+
+        return services;
+    }
+
+    /// <summary>
+    /// Adds CORS configuration.
+    /// </summary>
+    public static IServiceCollection AddCorsPolicy(this IServiceCollection services, IConfiguration configuration)
+    {
+        var allowedOrigins = configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() 
+            ?? new[] { "http://localhost:3000", "http://localhost:3001" };
+
+        services.AddCors(options =>
+        {
+            options.AddPolicy("AllowedOrigins", builder =>
+            {
+                builder
+                    .WithOrigins(allowedOrigins)
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials();
+            });
+        });
+
+        return services;
+    }
+}

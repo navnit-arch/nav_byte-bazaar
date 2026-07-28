@@ -1,0 +1,151 @@
+﻿global using MongoDB.Driver;
+global using MongoDB.Bson;
+global using MongoDB.Bson.Serialization.Attributes;
+global using AzureIntelligentSupplyChain.Core.Domain.Common;
+global using AzureIntelligentSupplyChain.Core.Domain.Interfaces;
+global using AzureIntelligentSupplyChain.Core.Application.Common.Dto;
+global using AzureIntelligentSupplyChain.Core.Application.Common.Models;
+global using AzureIntelligentSupplyChain.Core.Application.Common.Exceptions;
+global using AzureIntelligentSupplyChain.Infrastructure.Persistence.MongoDb;
+global using AzureIntelligentSupplyChain.Infrastructure.Configuration;
+global using AzureIntelligentSupplyChain.Infrastructure.Extensions;
+global using AzureIntelligentSupplyChain.Modules.CompanyManagement.Domain;
+global using AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Dtos;
+global using AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Commands;
+global using AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Queries;
+global using Microsoft.OpenApi.Models;
+global using System.Text;
+global using System.Text.Encodings.Web;
+global using Microsoft.AspNetCore.Authentication.JwtBearer;
+global using Microsoft.IdentityModel.Tokens;
+global using Serilog;
+global using Microsoft.Extensions.Options;
+global using FluentValidation;
+global using AutoMapper;
+global using MediatR;
+global using System.Reflection;
+global using System.Linq.Expressions;
+global using Microsoft.AspNetCore.Mvc;
+global using System.Security.Claims;
+global using Microsoft.AspNetCore.Authorization;
+global using Microsoft.AspNetCore.Diagnostics;
+global using ValidationException = AzureIntelligentSupplyChain.Core.Application.Common.Exceptions.ValidationException;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add logging
+builder.Services.AddLogging(builder.Configuration);
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog();
+
+// Add infrastructure services
+builder.Services
+    .AddMongoDb(builder.Configuration)
+    .AddApplicationServices(builder.Configuration)
+    .AddJwtAuthentication(builder.Configuration)
+    .AddSwagger()
+    .AddCorsPolicy(builder.Configuration);
+
+// Add controllers and API exploration
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+
+var app = builder.Build();
+
+// Configure middleware
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Azure Intelligent Supply Chain API V1");
+        c.DefaultModelsExpandDepth(2);
+        c.DefaultModelExpandDepth(2);
+    });
+}
+
+app.UseHttpsRedirection();
+app.UseCors("AllowedOrigins");
+app.UseAuthentication();
+app.UseAuthorization();
+
+// Global exception handler middleware
+app.UseExceptionHandler(exceptionHandlerApp =>
+{
+    exceptionHandlerApp.Run(async context =>
+    {
+        var exception = context.Features.Get<IExceptionHandlerFeature>()?.Error;
+        var logger = context.RequestServices.GetRequiredService<ILogger<Program>>();
+
+        logger.LogError(exception, "An unhandled exception occurred");
+
+        var response = new ApiResponse();
+        var statusCode = StatusCodes.Status500InternalServerError;
+
+        switch (exception)
+        {
+            case ValidationException validationException:
+                response = ApiResponse.FailureResponse("Validation failed", validationException.Errors);
+                statusCode = StatusCodes.Status400BadRequest;
+                break;
+            case NotFoundException notFoundException:
+                response = ApiResponse.FailureResponse(notFoundException.Message);
+                statusCode = StatusCodes.Status404NotFound;
+                break;
+            case BusinessRuleException businessRuleException:
+                response = ApiResponse.FailureResponse(businessRuleException.Message);
+                statusCode = StatusCodes.Status422UnprocessableEntity;
+                break;
+            default:
+                response = ApiResponse.FailureResponse("An unexpected error occurred. Please contact support.");
+                break;
+        }
+
+        response.TraceId = context.TraceIdentifier;
+        context.Response.StatusCode = statusCode;
+        context.Response.ContentType = "application/json";
+
+        await context.Response.WriteAsJsonAsync(response);
+    });
+});
+
+app.MapControllers();
+
+// Health check endpoint
+app.MapGet("/health", async (MongoDbContext context) =>
+{
+    try
+    {
+        // Simple MongoDB connectivity check
+        var adminDatabase = context.GetDatabase().Client.GetDatabase("admin");
+        await adminDatabase.RunCommandAsync<BsonDocument>(new BsonDocument("ping", 1));
+
+        return Results.Ok(new { status = "healthy", timestamp = DateTime.UtcNow });
+    }
+    catch
+    {
+        return Results.StatusCode(StatusCodes.Status503ServiceUnavailable);
+    }
+})
+.WithName("Health Check")
+.WithOpenApi()
+.Produces(StatusCodes.Status200OK)
+.Produces(StatusCodes.Status503ServiceUnavailable);
+
+// Root endpoint
+app.MapGet("/", () => new ApiResponse
+{
+    Success = true,
+    Message = "Azure Intelligent Supply Chain Management Platform API",
+    Data = new
+    {
+        Version = "1.0.0",
+        Environment = app.Environment.EnvironmentName,
+        Documentation = "/swagger/index.html"
+    }
+})
+.WithName("Root")
+.WithOpenApi()
+.Produces(StatusCodes.Status200OK);
+
+app.Run();

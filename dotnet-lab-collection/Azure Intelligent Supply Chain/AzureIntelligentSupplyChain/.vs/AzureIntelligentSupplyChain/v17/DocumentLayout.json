@@ -1,0 +1,398 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|c:\\applications\\github\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\azure intelligent supply chain\\azureintelligentsupplychain\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|c:\\applications\\github\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\azure intelligent supply chain\\azureintelligentsupplychain\\src\\core\\domain\\interfaces\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|solutionrelative:src\\core\\domain\\interfaces\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|c:\\applications\\github\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\azure intelligent supply chain\\azureintelligentsupplychain\\src\\core\\domain\\common\\specification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|solutionrelative:src\\core\\domain\\common\\specification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|c:\\applications\\github\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\azure intelligent supply chain\\azureintelligentsupplychain\\src\\modules\\companymanagement\\application\\mappings\\companymappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|solutionrelative:src\\modules\\companymanagement\\application\\mappings\\companymappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|c:\\applications\\github\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\azure intelligent supply chain\\azureintelligentsupplychain\\src\\modules\\companymanagement\\application\\commands\\deletecompanycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|solutionrelative:src\\modules\\companymanagement\\application\\commands\\deletecompanycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|c:\\applications\\github\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\azure intelligent supply chain\\azureintelligentsupplychain\\src\\modules\\companymanagement\\application\\commands\\updatecompanycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|solutionrelative:src\\modules\\companymanagement\\application\\commands\\updatecompanycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|c:\\applications\\github\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\azure intelligent supply chain\\azureintelligentsupplychain\\src\\modules\\companymanagement\\application\\queries\\getallcompaniesquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|solutionrelative:src\\modules\\companymanagement\\application\\queries\\getallcompaniesquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|c:\\applications\\github\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\azure intelligent supply chain\\azureintelligentsupplychain\\src\\modules\\companymanagement\\application\\commands\\createcompanycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|solutionrelative:src\\modules\\companymanagement\\application\\commands\\createcompanycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|c:\\applications\\github\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\azure intelligent supply chain\\azureintelligentsupplychain\\src\\modules\\companymanagement\\application\\queries\\getcompanybyidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|solutionrelative:src\\modules\\companymanagement\\application\\queries\\getcompanybyidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|c:\\applications\\github\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\azure intelligent supply chain\\azureintelligentsupplychain\\src\\infrastructure\\persistence\\mongodb\\mongodbunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|solutionrelative:src\\infrastructure\\persistence\\mongodb\\mongodbunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|c:\\applications\\github\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\azure intelligent supply chain\\azureintelligentsupplychain\\src\\infrastructure\\persistence\\mongodb\\mongodbrepositoryfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|solutionrelative:src\\infrastructure\\persistence\\mongodb\\mongodbrepositoryfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|c:\\applications\\github\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\azure intelligent supply chain\\azureintelligentsupplychain\\src\\infrastructure\\persistence\\mongodb\\mongodbrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|solutionrelative:src\\infrastructure\\persistence\\mongodb\\mongodbrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|c:\\applications\\github\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\azure intelligent supply chain\\azureintelligentsupplychain\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|c:\\applications\\github\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\azure intelligent supply chain\\azureintelligentsupplychain\\documentation_index.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}|",
+      "RelativeMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|solutionrelative:documentation_index.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|c:\\applications\\github\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\azure intelligent supply chain\\azureintelligentsupplychain\\developer_guide.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}|",
+      "RelativeMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|solutionrelative:developer_guide.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|c:\\applications\\github\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\azure intelligent supply chain\\azureintelligentsupplychain\\readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}|",
+      "RelativeMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|solutionrelative:readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|c:\\applications\\github\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\azure intelligent supply chain\\azureintelligentsupplychain\\delivery_summary.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}|",
+      "RelativeMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|solutionrelative:delivery_summary.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|c:\\applications\\github\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\azure intelligent supply chain\\azureintelligentsupplychain\\completion_summary.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}|",
+      "RelativeMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|solutionrelative:completion_summary.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|c:\\applications\\github\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\azure intelligent supply chain\\azureintelligentsupplychain\\api_contract.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}|",
+      "RelativeMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|solutionrelative:api_contract.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|c:\\applications\\github\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\azure intelligent supply chain\\azureintelligentsupplychain\\quickstart.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}|",
+      "RelativeMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|solutionrelative:quickstart.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|c:\\applications\\github\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\azure intelligent supply chain\\azureintelligentsupplychain\\implementation_summary.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}|",
+      "RelativeMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|solutionrelative:implementation_summary.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|c:\\applications\\github\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\azure intelligent supply chain\\azureintelligentsupplychain\\azureintelligentsupplychain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{507595E5-04C4-48D9-83C7-3882BE015685}|AzureIntelligentSupplyChain.csproj|solutionrelative:azureintelligentsupplychain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\Program.cs*",
+              "RelativeToolTip": "Program.cs*",
+              "ViewState": "AgIAACoAAAAAAAAAAAAswAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-19T17:13:33.868Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IRepository.cs",
+              "DocumentMoniker": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\src\\Core\\Domain\\Interfaces\\IRepository.cs",
+              "RelativeDocumentMoniker": "src\\Core\\Domain\\Interfaces\\IRepository.cs",
+              "ToolTip": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\src\\Core\\Domain\\Interfaces\\IRepository.cs",
+              "RelativeToolTip": "src\\Core\\Domain\\Interfaces\\IRepository.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAQwDEAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-19T16:31:25.521Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Specification.cs",
+              "DocumentMoniker": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\src\\Core\\Domain\\Common\\Specification.cs",
+              "RelativeDocumentMoniker": "src\\Core\\Domain\\Common\\Specification.cs",
+              "ToolTip": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\src\\Core\\Domain\\Common\\Specification.cs",
+              "RelativeToolTip": "src\\Core\\Domain\\Common\\Specification.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAuwBEAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-19T16:31:08.434Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CompanyMappingProfile.cs",
+              "DocumentMoniker": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\src\\Modules\\CompanyManagement\\Application\\Mappings\\CompanyMappingProfile.cs",
+              "RelativeDocumentMoniker": "src\\Modules\\CompanyManagement\\Application\\Mappings\\CompanyMappingProfile.cs",
+              "ToolTip": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\src\\Modules\\CompanyManagement\\Application\\Mappings\\CompanyMappingProfile.cs",
+              "RelativeToolTip": "src\\Modules\\CompanyManagement\\Application\\Mappings\\CompanyMappingProfile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-19T16:33:17.702Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DeleteCompanyCommand.cs",
+              "DocumentMoniker": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\src\\Modules\\CompanyManagement\\Application\\Commands\\DeleteCompanyCommand.cs",
+              "RelativeDocumentMoniker": "src\\Modules\\CompanyManagement\\Application\\Commands\\DeleteCompanyCommand.cs",
+              "ToolTip": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\src\\Modules\\CompanyManagement\\Application\\Commands\\DeleteCompanyCommand.cs",
+              "RelativeToolTip": "src\\Modules\\CompanyManagement\\Application\\Commands\\DeleteCompanyCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-19T16:25:46.898Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UpdateCompanyCommand.cs",
+              "DocumentMoniker": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\src\\Modules\\CompanyManagement\\Application\\Commands\\UpdateCompanyCommand.cs",
+              "RelativeDocumentMoniker": "src\\Modules\\CompanyManagement\\Application\\Commands\\UpdateCompanyCommand.cs",
+              "ToolTip": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\src\\Modules\\CompanyManagement\\Application\\Commands\\UpdateCompanyCommand.cs",
+              "RelativeToolTip": "src\\Modules\\CompanyManagement\\Application\\Commands\\UpdateCompanyCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-19T16:24:49.218Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "GetAllCompaniesQuery.cs",
+              "DocumentMoniker": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\src\\Modules\\CompanyManagement\\Application\\Queries\\GetAllCompaniesQuery.cs",
+              "RelativeDocumentMoniker": "src\\Modules\\CompanyManagement\\Application\\Queries\\GetAllCompaniesQuery.cs",
+              "ToolTip": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\src\\Modules\\CompanyManagement\\Application\\Queries\\GetAllCompaniesQuery.cs",
+              "RelativeToolTip": "src\\Modules\\CompanyManagement\\Application\\Queries\\GetAllCompaniesQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAI0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-19T16:25:13.955Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CreateCompanyCommand.cs",
+              "DocumentMoniker": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\src\\Modules\\CompanyManagement\\Application\\Commands\\CreateCompanyCommand.cs",
+              "RelativeDocumentMoniker": "src\\Modules\\CompanyManagement\\Application\\Commands\\CreateCompanyCommand.cs",
+              "ToolTip": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\src\\Modules\\CompanyManagement\\Application\\Commands\\CreateCompanyCommand.cs",
+              "RelativeToolTip": "src\\Modules\\CompanyManagement\\Application\\Commands\\CreateCompanyCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-19T16:27:20.401Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "GetCompanyByIdQuery.cs",
+              "DocumentMoniker": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\src\\Modules\\CompanyManagement\\Application\\Queries\\GetCompanyByIdQuery.cs",
+              "RelativeDocumentMoniker": "src\\Modules\\CompanyManagement\\Application\\Queries\\GetCompanyByIdQuery.cs",
+              "ToolTip": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\src\\Modules\\CompanyManagement\\Application\\Queries\\GetCompanyByIdQuery.cs",
+              "RelativeToolTip": "src\\Modules\\CompanyManagement\\Application\\Queries\\GetCompanyByIdQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-19T16:24:57.319Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "MongoDbUnitOfWork.cs",
+              "DocumentMoniker": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\src\\Infrastructure\\Persistence\\MongoDb\\MongoDbUnitOfWork.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\Persistence\\MongoDb\\MongoDbUnitOfWork.cs",
+              "ToolTip": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\src\\Infrastructure\\Persistence\\MongoDb\\MongoDbUnitOfWork.cs",
+              "RelativeToolTip": "src\\Infrastructure\\Persistence\\MongoDb\\MongoDbUnitOfWork.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-19T16:33:21.971Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "MongoDbRepositoryFactory.cs",
+              "DocumentMoniker": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\src\\Infrastructure\\Persistence\\MongoDb\\MongoDbRepositoryFactory.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\Persistence\\MongoDb\\MongoDbRepositoryFactory.cs",
+              "ToolTip": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\src\\Infrastructure\\Persistence\\MongoDb\\MongoDbRepositoryFactory.cs",
+              "RelativeToolTip": "src\\Infrastructure\\Persistence\\MongoDb\\MongoDbRepositoryFactory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-19T16:27:03.338Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "MongoDbRepository.cs",
+              "DocumentMoniker": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\src\\Infrastructure\\Persistence\\MongoDb\\MongoDbRepository.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\Persistence\\MongoDb\\MongoDbRepository.cs",
+              "ToolTip": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\src\\Infrastructure\\Persistence\\MongoDb\\MongoDbRepository.cs",
+              "RelativeToolTip": "src\\Infrastructure\\Persistence\\MongoDb\\MongoDbRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAM4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-19T16:30:49.086Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "DEVELOPER_GUIDE.md",
+              "DocumentMoniker": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\DEVELOPER_GUIDE.md",
+              "RelativeDocumentMoniker": "DEVELOPER_GUIDE.md",
+              "ToolTip": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\DEVELOPER_GUIDE.md",
+              "RelativeToolTip": "DEVELOPER_GUIDE.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJECAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-07-19T16:40:45.433Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "DELIVERY_SUMMARY.md",
+              "DocumentMoniker": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\DELIVERY_SUMMARY.md",
+              "RelativeDocumentMoniker": "DELIVERY_SUMMARY.md",
+              "ToolTip": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\DELIVERY_SUMMARY.md",
+              "RelativeToolTip": "DELIVERY_SUMMARY.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAOIBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-07-19T16:41:45.833Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "README.md",
+              "DocumentMoniker": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\README.md",
+              "RelativeDocumentMoniker": "README.md",
+              "ToolTip": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\README.md",
+              "RelativeToolTip": "README.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAG4BAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-07-19T16:41:08.999Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-07-19T16:45:14.686Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "DOCUMENTATION_INDEX.md",
+              "DocumentMoniker": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\DOCUMENTATION_INDEX.md",
+              "RelativeDocumentMoniker": "DOCUMENTATION_INDEX.md",
+              "ToolTip": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\DOCUMENTATION_INDEX.md",
+              "RelativeToolTip": "DOCUMENTATION_INDEX.md",
+              "ViewState": "AgIAAFwAAAAAAAAAAAAswGkAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-07-19T16:42:10.923Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "COMPLETION_SUMMARY.md",
+              "DocumentMoniker": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\COMPLETION_SUMMARY.md",
+              "RelativeDocumentMoniker": "COMPLETION_SUMMARY.md",
+              "ToolTip": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\COMPLETION_SUMMARY.md",
+              "RelativeToolTip": "COMPLETION_SUMMARY.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKsBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-07-19T16:40:10.814Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "API_CONTRACT.md",
+              "DocumentMoniker": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\API_CONTRACT.md",
+              "RelativeDocumentMoniker": "API_CONTRACT.md",
+              "ToolTip": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\API_CONTRACT.md",
+              "RelativeToolTip": "API_CONTRACT.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEMCAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-07-19T16:39:40.492Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "QUICKSTART.md",
+              "DocumentMoniker": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\QUICKSTART.md",
+              "RelativeDocumentMoniker": "QUICKSTART.md",
+              "ToolTip": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\QUICKSTART.md",
+              "RelativeToolTip": "QUICKSTART.md",
+              "ViewState": "AgIAABQAAAAAAAAAAAAswCEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-07-19T16:39:15.636Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "IMPLEMENTATION_SUMMARY.md",
+              "DocumentMoniker": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\IMPLEMENTATION_SUMMARY.md",
+              "RelativeDocumentMoniker": "IMPLEMENTATION_SUMMARY.md",
+              "ToolTip": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\IMPLEMENTATION_SUMMARY.md",
+              "RelativeToolTip": "IMPLEMENTATION_SUMMARY.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMgBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-07-19T16:38:40.188Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "AzureIntelligentSupplyChain",
+              "DocumentMoniker": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\AzureIntelligentSupplyChain.csproj",
+              "RelativeDocumentMoniker": "AzureIntelligentSupplyChain.csproj",
+              "ToolTip": "C:\\Applications\\GitHub\\nav_byte-bazaar\\nav_byte-bazaar\\dotnet-lab-collection\\Azure Intelligent Supply Chain\\AzureIntelligentSupplyChain\\AzureIntelligentSupplyChain.csproj",
+              "RelativeToolTip": "AzureIntelligentSupplyChain.csproj",
+              "ViewState": "AgIAAEAAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-07-19T16:26:13.939Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

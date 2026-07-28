@@ -1,0 +1,71 @@
+﻿namespace AzureIntelligentSupplyChain.Modules.CompanyManagement.Application.Commands;
+
+/// <summary>
+/// Command to create a new company.
+/// </summary>
+public class CreateCompanyCommand : IRequest<ApiResponse<CompanyDto>>
+{
+    /// <summary>
+    /// Company details to create.
+    /// </summary>
+    public CreateCompanyDto Company { get; set; } = null!;
+
+    /// <summary>
+    /// User ID performing the operation.
+    /// </summary>
+    public string? UserId { get; set; }
+}
+
+/// <summary>
+/// Handler for creating a company.
+/// </summary>
+public class CreateCompanyCommandHandler : IRequestHandler<CreateCompanyCommand, ApiResponse<CompanyDto>>
+{
+    private readonly IRepositoryFactory _repositoryFactory;
+    private readonly IMapper _mapper;
+    private readonly ILogger<CreateCompanyCommandHandler> _logger;
+    private readonly IUnitOfWork _unitOfWork;
+
+    public CreateCompanyCommandHandler(
+        IRepositoryFactory repositoryFactory,
+        IMapper mapper,
+        ILogger<CreateCompanyCommandHandler> logger,
+        IUnitOfWork unitOfWork)
+    {
+        _repositoryFactory = repositoryFactory;
+        _mapper = mapper;
+        _logger = logger;
+        _unitOfWork = unitOfWork;
+    }
+
+    public async Task<ApiResponse<CompanyDto>> Handle(
+        CreateCompanyCommand request,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            _logger.LogInformation("Creating new company: {CompanyName}", request.Company.Name);
+
+            var repository = _repositoryFactory.CreateRepository<Company>();
+
+            // Map DTO to entity
+            var company = _mapper.Map<Company>(request.Company);
+            company.CreatedBy = request.UserId;
+
+            // Add to repository
+            await repository.AddAsync(company, cancellationToken);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+            var result = _mapper.Map<CompanyDto>(company);
+            _logger.LogInformation("Company created successfully with ID: {CompanyId}", company.Id);
+
+            return ApiResponse<CompanyDto>.SuccessResponse(result, "Company created successfully");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error creating company");
+            return ApiResponse<CompanyDto>.FailureResponse("An error occurred while creating the company");
+        }
+    }
+}
+

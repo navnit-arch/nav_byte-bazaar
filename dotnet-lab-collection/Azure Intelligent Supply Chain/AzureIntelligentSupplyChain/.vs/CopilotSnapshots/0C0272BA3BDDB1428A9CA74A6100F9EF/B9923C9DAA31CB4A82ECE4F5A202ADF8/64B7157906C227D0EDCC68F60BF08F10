@@ -1,0 +1,26 @@
+﻿namespace AzureIntelligentSupplyChain.Core.Domain.Common;
+
+/// <summary>
+/// Base specification class for building queries with DDD principles.
+/// </summary>
+public abstract class Specification
+{
+    public Expression<Func<Entity, bool>>? Criteria { get; protected set; }
+    public List<Expression<Func<Entity, object>>> Includes { get; } = new();
+    public List<string> IncludeStrings { get; } = new();
+    public Expression<Func<Entity, object>>? OrderBy { get; protected set; }
+    public Expression<Func<Entity, object>>? OrderByDescending { get; protected set; }
+    public int? Take { get; protected set; }
+    public int? Skip { get; protected set; }
+    public bool IsPagingEnabled { get; protected set; }
+
+    protected virtual void AddInclude(Expression<Func<Entity, object>> includeExpression)
+    {
+        Includes.Add(includeExpression);
+    }
+
+    protected virtual void AddInclude(string includeString)
+    {
+        IncludeStrings.Add(includeString);
+    }
+}
